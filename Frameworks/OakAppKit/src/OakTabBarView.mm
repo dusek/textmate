@@ -929,7 +929,7 @@ static NSString* const OakTabItemPasteboardType = @"OakTabItemPasteboardType";
 	// tab group attributes
 	else if([attribute isEqualToString:NSAccessibilityFocusedAttribute])
 		return @NO;
-	else if([attribute isEqualToString:NSAccessibilityChildrenAttribute] || [attribute isEqualToString:NSAccessibilityContentsAttribute] || [attribute isEqualToString:NSAccessibilityTabsAttribute])
+	else if([attribute isEqualToString:NSAccessibilityTabsAttribute])
 	{
 		NSMutableArray* array = [NSMutableArray array];
 		for(OakTabItem* tabItem in _tabItems)
@@ -939,6 +939,8 @@ static NSString* const OakTabItemPasteboardType = @"OakTabItemPasteboardType";
 		}
 		return array;
 	}
+	else if([attribute isEqualToString:NSAccessibilityContentsAttribute])
+		return [self accessibilityAttributeValue:NSAccessibilityChildrenAttribute];
 	else if([attribute isEqualToString:NSAccessibilityValueAttribute])
 		return _selectedTabItem.tabItemView;
 	else
